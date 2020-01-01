@@ -1,18 +1,29 @@
 package com.technopreneur.moneytransfer.model;
 
-import com.google.gson.JsonElement;
-
 public class Response {
 	private Status status;
     private String message;
-    private JsonElement data;
+    private Object data;
      
-    public Response(Status status) {
-    }
-    public Response(Status status, String message) {
-    }
-    public Response(Status status, JsonElement data) {
-    }
+   
+	public Response(Status status) {
+		super();
+		this.status = status;
+	}
+	
+	
+	public Response(Status status, String message) {
+		super();
+		this.status = status;
+		this.message = message;
+	}
+
+
+	public Response(Status status, Object data) {
+		super();
+		this.status = status;
+		this.data = data;
+	}
 	public Status getStatus() {
 		return status;
 	}
@@ -25,10 +36,10 @@ public class Response {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public JsonElement getData() {
+	public Object getData() {
 		return data;
 	}
-	public void setData(JsonElement data) {
+	public void setData(Object data) {
 		this.data = data;
 	}
      

@@ -3,9 +3,8 @@ package com.technopreneur.moneytransfer;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.technopreneur.moneytransfer.config.MoneyTransferConfig;
-import com.technopreneur.moneytransfer.queue.SimpleMoneyTransferQueueProcessor;
-import com.technopreneur.moneytransfer.web.BaseController;
-import com.technopreneur.moneytransfer.web.MoneyTransferController;
+import com.technopreneur.moneytransfer.starters.MoneyAppStarter;
+import com.technopreneur.moneytransfer.starters.SimpleMoneyAppStarter;
 
 /**
  * Money Transfer App
@@ -14,10 +13,13 @@ import com.technopreneur.moneytransfer.web.MoneyTransferController;
 public class MoneyTransferApp {
 
 	public static void main(String[] args) {
+		start();
+
+	}
+
+	private static void start() {
 		Injector injector = Guice.createInjector(new MoneyTransferConfig());
-		BaseController moneyTransferController = injector.getInstance(MoneyTransferController.class);
-		moneyTransferController.addEndPoints();
-		SimpleMoneyTransferQueueProcessor moneyTransferQueueProcessor = injector.getInstance(SimpleMoneyTransferQueueProcessor.class);
-		new Thread(moneyTransferQueueProcessor).start();
+		MoneyAppStarter moneyAppStarter = injector.getInstance(SimpleMoneyAppStarter.class);
+		moneyAppStarter.start();
 	}
 }

@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import com.technopreneur.moneytransfer.model.MoneyTransferTask;
 import com.technopreneur.moneytransfer.processor.AccountProcessor;
-import com.technopreneur.moneytransfer.store.MoneyTransferStore;
+import com.technopreneur.moneytransfer.store.MoneyTransferAccountStore;
 
 public class SimpleMoneyTransferQueueProcessor implements MoneyTransferQueueProcessor, Runnable {
 	
@@ -12,14 +12,14 @@ public class SimpleMoneyTransferQueueProcessor implements MoneyTransferQueueProc
 	private MoneyTransferQueue moneyTransferQueue;
 	
 	@Inject
-	private MoneyTransferStore moneyTransferStore;
+	private MoneyTransferAccountStore moneyTransferAccountStore;
 	
 	@Override
 	public void process() {
 		while (true) {
 			try {
 				MoneyTransferTask moneyTransferTask = moneyTransferQueue.getNext();
-				AccountProcessor accountProcessor =  moneyTransferStore.getAccountProcessor(moneyTransferTask);
+				AccountProcessor accountProcessor =  moneyTransferAccountStore.getAccountProcessor(moneyTransferTask);
 				accountProcessor.addToProcessingQueue(moneyTransferTask);
 			} catch (Exception e) {
 				e.printStackTrace();

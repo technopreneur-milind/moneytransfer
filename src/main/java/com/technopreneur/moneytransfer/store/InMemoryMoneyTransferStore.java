@@ -11,7 +11,7 @@ import com.technopreneur.moneytransfer.processor.SimpleAccountProcessor;
 import com.technopreneur.moneytransfer.service.AccountService;
 
 @Singleton
-public class InMemoryMoneyTransferStore implements MoneyTransferStore {
+public class InMemoryMoneyTransferStore implements MoneyTransferAccountStore {
 	
 	@Inject
 	private AccountService accountService;
