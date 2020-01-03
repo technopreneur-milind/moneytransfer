@@ -126,6 +126,7 @@ If you like, you can even execute com.technopreneur.moneytransfer.EndToEndMoneyT
 
 # 5> Detailed Demo 
 ==============================
+
 	# Step 1. Create two accounts : POST  http://localhost:4567/accounts
 Step 1a. Input for first Account
 {
@@ -149,29 +150,31 @@ Step 1b. Input for second Account
 
 ==============================
 ==============================
-# Step 2. Get  accounts : GET  http://localhost:4567/accounts
+	# Step 2. Get  accounts : GET  http://localhost:4567/accounts
 Output showing created Accounts
 
 
 {"status":"SUCCESS","data":[{"accountId":1,"name":"Scott","balance":1000},{"accountId":2,"name":"Tiger","balance":1000}]}
 
+	Please note that balances =1000 for both Scott and Tiger!
+
 ==============================
 
-#Step 3. Execute the Transfer of 100 : 
+	#Step 3. Execute the Transfer of 100 : 
 
-# POST  http://localhost:4567/transfer 
+	# POST  http://localhost:4567/transfer 
 
-# Input : {"fromAccount" : "1","toAccount" :"2","amount":"100" }
+	# Input : {"fromAccount" : "1","toAccount" :"2","amount":"100" }
 
 
-# Output 
+#Output 
 Confirming transfer queued
 
-{"status":"SUCCESS",
-# "message":"Your transfers are succesfully queued ! 
+	{"status":"SUCCESS",
+	#"message":"Your transfers are succesfully queued !} 
 
 ==============================
-==============================
+
 
 #Step 4. Get  Transfer status : 
 
