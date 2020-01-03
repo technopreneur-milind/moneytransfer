@@ -18,12 +18,13 @@ Basically this application provides ability to :
 
 	3> POST localhost:4567/transfer - This is for money transfer from account A to B
 
-	4> GET localhost:4567/transfer/status/{transactionId} -- This is for checking current status of Transfer
+	4> GET localhost:4567/transfer/status/{transactionId} -- This is for checking current status 
+	of Transfer
 
 	5> POST localhost:4567/batchTransfer - for Batch Transfer
 
 
-# 2> Few words about Design/Architecture:
+#2> Few words about Design/Architecture:
 
 When a user submits request for money transfer(endpoint#3), the request is uploaded to a queue and a transaction id is sent to back to user as a response . User can use this transactionId to check status of transfer using another endpoint(endpoint#4).
 
@@ -31,31 +32,31 @@ System picks up each transfer from the queue and sends it processing to Acccount
 
 For example, if you send following transfers( fromAccount ->toAccount) :
 
-1 -> 2
+	1 -> 2
 
-1->3
+	1->3
 
-1->4
+	1->4
 
-2->3
+	2->3
 
-3->4
+	3->4
 
-4->6
+	4->6
 
 
 System will rearrange these transaction as :
 
-AccountProcessor1 : Debit from 1 (for 2 ) -> Debit from 1 for 3 -> Debit from 1 for 4 
+	AccountProcessor1 : Debit from 1 (for 2 ) -> Debit from 1 for 3 -> Debit from 1 for 4 
 
-AccountProcessor1 will also spawn threads for credit transaction as soon as debit is complete however next debit transaction for Account will not wait for credit to complete ( only wait is on Debit Transaction ,accountwise)
+	AccountProcessor1 will also spawn threads for credit transaction as soon as debit is complete however next debit transaction for Account will not wait for credit to complete ( only wait is on Debit Transaction ,accountwise)
 
 					
-AccountProcesor 2 : Debit from 2 & spawn a thread for credit to 3
+	AccountProcesor 2 : Debit from 2 & spawn a thread for credit to 3
 
-AccountProcesor 3 : Debit from 3 & spawn a thread for credit to 4
+	AccountProcesor 3 : Debit from 3 & spawn a thread for credit to 4
 
-AccountProcesor 4 : Debit from 4 & spawn a thread for credit to 6
+	AccountProcesor 4 : Debit from 4 & spawn a thread for credit to 6
 
 
 Here AccountPrcoessor1, AccountProcessor2 and so on are executing concurrently.
@@ -68,14 +69,14 @@ It means the only dependency or ordering of transactions is debit for a given ac
 
 Obvious reason for making debit single threaded ( for a given account) is to make sure we honour the order of submission.
 
-# Of course, if we want to turn this into multi-threaded, it can be easily done as SOLID principles are followed .
+	#Of course, if we want to turn this into multi-threaded, it can be easily done as SOLID principles are followed .
 
 The dependencies is through interfaces so one class really doesnt know about other one. We have also made sure, each class has single responsibility and is open for extension. 
 
-# For example, most implementations in this exercise are memory based however if we want to turn to some persistent based implementations , we can easily do so by implementing the given interface.
+	#For example, most implementations in this exercise are memory based however if we want to turn to some persistent based implementations , we can easily do so by implementing the given interface.
 
 
-# If you are running low on time, you can skip "How to Run"(#3) and go to Quick Demo(#4)/Detailed Demo(#5) Sections.
+	# If you are running low on time, you can skip "How to Run"(#3) and go to Quick Demo(#4)/Detailed Demo(#5) Sections.
 
 ====================
 # 3> How to run the App:
