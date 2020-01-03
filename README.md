@@ -149,7 +149,7 @@ Step 1b. Input for second Account
 {"status":"SUCCESS","data":{"accountId":2,"name":"Tiger","balance":1000}}
 
 ==============================
-==============================
+
 	# Step 2. Get  accounts : GET  http://localhost:4567/accounts
 Output showing created Accounts
 
@@ -178,10 +178,10 @@ Confirming transfer queued
 
 #Step 4. Get  Transfer status : 
 
-# GET  http://localhost:4567/transfer/status/{3d730dca-1ee1-4a1e-aef2-6ce643224f44}
+	#GET  http://localhost:4567/transfer/status/{3d730dca-1ee1-4a1e-aef2-6ce643224f44}
 
 Output showing Transfer Status
-"Transaction is Successful"
+	 "Transaction is Successful"
 
 ==============================
 ==============================
@@ -190,12 +190,12 @@ Output showing Transfer Status
 
 Output showing updated Accounts Balances
 
-{"status":"SUCCESS",
-"data":[
-# {"accountId":1,"name":"Scott","balance":900},
-# {"accountId":2,"name":"Tiger","balance":1100}
+		{"status":"SUCCESS",
+		"data":[
+		#{"accountId":1,"name":"Scott","balance":900},
+		#{"accountId":2,"name":"Tiger","balance":1100}
 
-]}
+		]}
 
 ==============================
 
