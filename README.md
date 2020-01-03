@@ -86,6 +86,8 @@ Option 1 : execute run.sh (or run.bat)
 
 Option 2 : navigate to moneytransfer root directory and execute java -jar moneytransfer-0.0.1-SNAPSHOT.jar
 
+If you want to verify if application is up and running , execute following GET request:
+GET http://localhost:4567/accounts . ( It will return success)
 
 with Maven( or if you want to Build & run)
 
