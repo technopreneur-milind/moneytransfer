@@ -6,12 +6,15 @@ Step 1a. Input for first Account
  name:Scott,
  balance:1000
 }
+Output for first Account
+{"status":"SUCCESS","data":{"accountId":1,"name":"Scott","balance":1000}}
 Step 1b. Input for second Account
 {
  accountId:2,
  name:Tiger,
  balance:1000
 }
+{"status":"SUCCESS","data":{"accountId":2,"name":"Tiger","balance":1000}}
 ==============================
 ==============================
 Step 2. Get  accounts : GET  http://localhost:4567/accounts
@@ -20,10 +23,10 @@ Output showing created Accounts
 ==============================
 Step 3. Execute the Transfer of 100 : POST  http://localhost:4567/transfer
 Output Confirming transfer queued
-{"status":"SUCCESS","message":"Your transfers are succesfully queued ! Please refer Data Section for Transaction Id.You can quote this transaction Id for any queries related to the transfer. You can check status at /transfer/status/{transactionId} endpoint","data":"1c040e20-0ac5-4ed8-a85a-e9b2f0f63c31"}
+{"status":"SUCCESS","message":"Your transfers are succesfully queued ! Please refer Data Section for Transaction Id.You can quote this transaction Id for any queries related to the transfer. You can check status at /transfer/status/{transactionId} endpoint","data":"4116f8c7-78c7-4f5e-9696-8ecea9ffe207"}
 ==============================
 ==============================
-Step 4. Get  Transfer status : GET  http://localhost:4567/transfer/status/{1c040e20-0ac5-4ed8-a85a-e9b2f0f63c31}
+Step 4. Get  Transfer status : GET  http://localhost:4567/transfer/status/{4116f8c7-78c7-4f5e-9696-8ecea9ffe207}
 Output showing Transfer Status
 "Transaction is Successful"
 ==============================

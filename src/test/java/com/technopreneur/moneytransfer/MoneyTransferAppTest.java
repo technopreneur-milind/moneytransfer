@@ -9,7 +9,7 @@ public class MoneyTransferAppTest {
         // Setup
 
         // Run the test
-        MoneyTransferApp.main(new String[]{"value"});
+       MoneyTransferApp.main(new String[]{"value"});
 
         // Verify the results
     }
