@@ -43,6 +43,7 @@ For example, if you send following transfers( fromAccount ->toAccount) :
 System will rearrange these transaction as :
 
 AccountProcessor1 : Debit from 1 (for 2 ) -> Debit from 1 for 3 -> Debit from 1 for 4 
+
 AccountProcessor1 will also spawn threads for credit transaction as soon as debit is complete however next debit transaction for Account will not wait for credit to complete ( only wait is on Debit Transaction ,accountwise)
 
 					
