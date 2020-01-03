@@ -41,53 +41,79 @@ For example, if you send following transfers( fromAccount ->toAccount) :
 
 
 System will rearrange these transaction as :
+
 AccountProcessor1 : Debit from 1 (for 2 ) -> Debit from 1 for 3 -> Debit from 1 for 4 
-					 |                          |                         |
-					 V                          V                         V       
-					Credit to 2               Credit to 3           Credit to 4
+AccountProcessor1 will also spawn threads for credit transaction as soon as debit is complete however next debit transaction for Account will not wait for credit to complete ( only wait is on Debit Transaction ,accountwise)
+
 					
 AccountProcesor 2 : Debit from 2 & spawn a thread for credit to 3
+
 AccountProcesor 3 : Debit from 3 & spawn a thread for credit to 4
+
 AccountProcesor 4 : Debit from 4 & spawn a thread for credit to 6
 
+
 Here AccountPrcoessor1, AccountProcessor2 and so on are executing concurrently.
-Also note that debit transaction are ordered and happen single threaded way. As soon as debit transaction is completed inside a AccountWiseProcessor for a given transfer, it spawns a new thread for credit transaction and immediately goes to process next debit transaction for the account.
+
+Also note that debit transaction are ordered and happen single threaded way. 
+As soon as debit transaction is completed inside a AccountWiseProcessor for a given transfer, it spawns a new thread for credit transaction and immediately goes to process next debit transaction for the account.
+
 
 It means the only dependency or ordering of transactions is debit for a given account,rest all is multi-threaded.
+
 Obvious reason for making debit single threaded ( for a given account) is to make sure we honour the order of submission.
+
 # Of course, if we want to turn this into multi-threaded, it can be easily done as SOLID principles are followed .
+
 The dependencies is through interfaces so one class really doesnt know about other one. We have also made sure, each class has single responsibility and is open for extension. 
+
 # For example, most implementations in this exercise are memory based however if we want to turn to some persistent based implementations , we can easily do so by implementing the given interface.
+
 
 
 
 
 # How to run the App:
 
+
 Prerequisites : 
 1> Install JDK 1.8 
- 
+
  Without any additional thing:
+ 
 Option 1 : execute run.sh (or run.bat) 
+
 Option 2 : navigate to moneytransfer root directory and execute java -jar moneytransfer-0.0.1-SNAPSHOT.jar
+
 
 with Maven( or if you want to Build & run)
 
+
 Option 1: run following command 
+
 mvn exec:java
+
 Option 2: 
+
 1> run following command 
+
 mvn clean install
+
 2> Now run following command
+
 java -jar target/moneytransfer-0.0.1-SNAPSHOT.jar
 
+
 # Quick Demo 
-You can look at MoneyTrasferAppDemo.txt available at root directory.
+You can look at 
+# MoneyTrasferAppDemo.txt available at root directory.
+
 This file has a recording of input and output and is output of End-to-End test,com.technopreneur.moneytransfer.EndToEndMoneyTransferTest.java.
+
 If you like, you can even execute com.technopreneur.moneytransfer.EndToEndMoneyTransferTest.java to see live output.
 
 
-#Detailed Demo 
+# Detailed Demo 
 ==============================
 # Step 1. Create two accounts : POST  http://localhost:4567/accounts
 Step 1a. Input for first Account
