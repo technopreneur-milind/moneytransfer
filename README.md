@@ -200,7 +200,7 @@ Output showing updated Accounts Balances
 
 Thing to note:
 
-		Scott's balance is now 900 and Tiger's increated to 1100, Tiger wins!!
+		Scott's balance is now 900 and Tiger's increased to 1100, Tiger wins!!
 
 ==============================
 
