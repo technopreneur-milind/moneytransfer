@@ -152,11 +152,18 @@ Output showing created Accounts
 
 # POST  http://localhost:4567/transfer 
 
+Input : 
+{
+	"fromAccount" : "1",
+	"toAccount" :"2",
+	"amount":"100"
+}
+
+
 # Output Confirming transfer queued
 
 {"status":"SUCCESS",
 # "message":"Your transfers are succesfully queued ! 
-Please refer Data Section for Transaction Id.You can quote this transaction Id for any queries related to the transfer. You can check status at /transfer/status/{transactionId} endpoint","data":"3d730dca-1ee1-4a1e-aef2-6ce643224f44"}
 
 ==============================
 ==============================
