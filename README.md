@@ -148,7 +148,9 @@ Output showing created Accounts
 
 ==============================
 
-#Step 3. Execute the Transfer of 100 : POST  http://localhost:4567/transfer 
+#Step 3. Execute the Transfer of 100 : 
+
+# POST  http://localhost:4567/transfer 
 
 # Output Confirming transfer queued
 
@@ -161,7 +163,7 @@ Please refer Data Section for Transaction Id.You can quote this transaction Id f
 
 #Step 4. Get  Transfer status : 
 
-#GET  http://localhost:4567/transfer/status/{3d730dca-1ee1-4a1e-aef2-6ce643224f44}
+# GET  http://localhost:4567/transfer/status/{3d730dca-1ee1-4a1e-aef2-6ce643224f44}
 
 Output showing Transfer Status
 "Transaction is Successful"
