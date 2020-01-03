@@ -69,14 +69,17 @@ It means the only dependency or ordering of transactions is debit for a given ac
 
 Obvious reason for making debit single threaded ( for a given account) is to make sure we honour the order of submission.
 
-	#Of course, if we want to turn this into multi-threaded, it can be easily done as SOLID principles are followed .
+	#Of course, if we want to turn this into multi-threaded, it can be easily done as 
+	SOLID principles are followed .
 
 The dependencies is through interfaces so one class really doesnt know about other one. We have also made sure, each class has single responsibility and is open for extension. 
 
-	#For example, most implementations in this exercise are memory based however if we want to turn to some persistent based implementations , we can easily do so by implementing the given interface.
+	#For example, most implementations in this exercise are memory based however if we want to turn
+	to some persistent based implementations , we can easily do so by implementing the given interface.
 
 
-	# If you are running low on time, you can skip "How to Run"(#3) and go to Quick Demo(#4)/Detailed Demo(#5) Sections.
+	# If you are running low on time, you can skip "How to Run"(#3) 
+	and go to Quick Demo(#4)/Detailed Demo(#5) Sections.
 
 ====================
 # 3> How to run the App:
