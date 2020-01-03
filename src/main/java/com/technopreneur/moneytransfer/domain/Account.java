@@ -2,12 +2,27 @@ package com.technopreneur.moneytransfer.domain;
 
 import com.technopreneur.moneytransfer.dto.AccountDto;
 
+import java.util.Objects;
+
 public class Account {
 	private Long accountId;
 
 	private String name;
 
 	private Long balance = 0L;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Account account = (Account) o;
+		return accountId.equals(account.accountId);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(accountId);
+	}
 
 	public Account(Long accountId, String name, Long balance) {
 		super();

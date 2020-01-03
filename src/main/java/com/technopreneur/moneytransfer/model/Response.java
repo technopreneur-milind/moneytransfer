@@ -10,14 +10,22 @@ public class Response {
 		super();
 		this.status = status;
 	}
-	
-	
+
+	public Response(Status status, String message, Object data) {
+		this.status = status;
+		this.message = message;
+		this.data = data;
+	}
+
 	public Response(Status status, String message) {
 		super();
 		this.status = status;
 		this.message = message;
 	}
 
+	public Response(Object data) {
+		this.data = data;
+	}
 
 	public Response(Status status, Object data) {
 		super();

@@ -29,7 +29,7 @@ public class SimpleAccountDao implements AccountDao {
 
 	@Override
 	public boolean accountExist(Long accountId) {
-		return accountExist(accountId);
+		return accountRepository.accountExist(accountId);
 	}
 
 	@Override

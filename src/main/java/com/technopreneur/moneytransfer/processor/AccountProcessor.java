@@ -7,6 +7,4 @@ public interface AccountProcessor {
 
 	public void addToProcessingQueue(MoneyTransferTask moneyTransferTask);
 	
-	public void process(AccountService accountService);
-
 }

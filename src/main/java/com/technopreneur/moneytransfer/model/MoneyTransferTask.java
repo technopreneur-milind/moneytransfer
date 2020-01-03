@@ -6,9 +6,9 @@ public class MoneyTransferTask {
 
 	private MoneyTransferDetail transferDetail;
 
-	private Long transactionId;
+	private String transactionId;
 
-	public MoneyTransferTask(MoneyTransferDetail transferDetail, long transactionId) {
+	public MoneyTransferTask(MoneyTransferDetail transferDetail, String transactionId) {
 		this.transferDetail = transferDetail;
 		this.transactionId = transactionId;
 	}
@@ -21,20 +21,17 @@ public class MoneyTransferTask {
 		this.transferDetail = transferDetail;
 	}
 
-	public long getTransactionId() {
+	public String getTransactionId() {
 		return transactionId;
 	}
 
-	public void setTransactionId(long transactionId) {
-		this.transactionId = transactionId;
-	}
 
 	public static MoneyTransferTask toMoneyTransferTask(MoneyTransferDetail transferDetail) {
 		return new MoneyTransferTask(transferDetail, generateTransactionId());
 	}
 
-	private static Long generateTransactionId() {
-		return UUID.randomUUID().getLeastSignificantBits();
+	private static String generateTransactionId() {
+		return UUID.randomUUID().toString();
 	}
 
 	@Override

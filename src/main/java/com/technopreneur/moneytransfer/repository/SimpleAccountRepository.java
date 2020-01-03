@@ -24,10 +24,10 @@ public class SimpleAccountRepository implements AccountRepository {
 	}
 
 	public void init() {
-		Account account1 = new Account(1L, "Scott", 100L);
+		/*Account account1 = new Account(1L, "Scott", 100L);
 		Account account2 = new Account(2L, "Tiger", 200L);
 		accounts.put(account1.getAccountId(), account1);
-		accounts.put(account2.getAccountId(), account2);
+		accounts.put(account2.getAccountId(), account2);*/
 	}
 
 	@Override

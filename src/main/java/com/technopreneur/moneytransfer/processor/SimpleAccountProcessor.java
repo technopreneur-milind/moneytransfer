@@ -1,12 +1,17 @@
 package com.technopreneur.moneytransfer.processor;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import com.google.inject.Inject;
+import com.technopreneur.moneytransfer.event.EventType;
+import com.technopreneur.moneytransfer.event.TransactionEvent;
+import com.technopreneur.moneytransfer.event.TransactionEventPublisher;
 import com.technopreneur.moneytransfer.model.MoneyTransferTask;
 import com.technopreneur.moneytransfer.service.AccountService;
+
+import javax.inject.Inject;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class SimpleAccountProcessor implements AccountProcessor {
 
@@ -16,12 +21,26 @@ public class SimpleAccountProcessor implements AccountProcessor {
 
 	private BlockingQueue<MoneyTransferTask> moneyTransferTasks = new LinkedBlockingQueue<>();
 
+	private TransactionEventPublisher eventPublisher;
+
+	private AccountService accountService;
+
+	private AccountProcessingStrategy accountProcessingStrategy;
+
 	public SimpleAccountProcessor() {}
 	
-	public SimpleAccountProcessor(Long accountId, AccountService accountService) {
+	public SimpleAccountProcessor(Long accountId, AccountService accountService,
+								  AccountProcessingStrategy accountProcessingStrategy, TransactionEventPublisher eventPublisher) {
 		this.accountId = accountId;
-		process(accountService);
-		
+		this.accountService = accountService;
+		this.eventPublisher = eventPublisher;
+		this.accountProcessingStrategy = accountProcessingStrategy;
+		process();
+	}
+
+	public int getTasksSize()
+	{
+		return moneyTransferTasks.size();
 	}
 
 	@Override
@@ -29,18 +48,17 @@ public class SimpleAccountProcessor implements AccountProcessor {
 		moneyTransferTasks.add(moneyTransferTask);
 	}
 	
-	@Override
-	public void process(AccountService accountService) {
-		new Thread(new TaskExecutor(accountService)).start();
+	private void process() {
+		ExecutorService accountProcessingService = accountProcessingStrategy.getExecutorService();
+		accountProcessingService.submit(new TaskExecutor());
+	}
+
+	private void publishEvent(String transactionId, EventType eventType)
+	{
+		eventPublisher.publishEvent(new TransactionEvent(transactionId, eventType));
 	}
 
 	class TaskExecutor implements Runnable {
-
-		private AccountService accountService;
-
-		public TaskExecutor(AccountService accountService) {
-			this.accountService = accountService;
-		}
 
 		public void processTasks() {
 			while (process.get()) {
@@ -49,15 +67,28 @@ public class SimpleAccountProcessor implements AccountProcessor {
 					moneyTransferTask = moneyTransferTasks.take();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 				if (moneyTransferTask != null) {
-					accountService.debitAccount(accountId, moneyTransferTask.getTransferDetail().getAmount());
-					Long toAccountId = moneyTransferTask.getTransferDetail().getToAccount();
-					new Thread(new CreditAccountExecutor(toAccountId, moneyTransferTask.getTransferDetail().getAmount(),accountService))
-							.start();
+					debit(moneyTransferTask);
+					credit(moneyTransferTask);
 				}
 			}
+		}
+
+		private void credit(MoneyTransferTask moneyTransferTask) {
+			final String transactionId = moneyTransferTask.getTransactionId();
+			Long toAccountId = moneyTransferTask.getTransferDetail().getToAccount();
+			ExecutorService executorService = Executors.newSingleThreadExecutor();
+			executorService.submit(new CreditAccountExecutor(toAccountId, moneyTransferTask.getTransferDetail().getAmount(), transactionId));
+		}
+
+		private void debit(MoneyTransferTask moneyTransferTask) {
+			final String transactionId = moneyTransferTask.getTransactionId();
+			//publishEvent(transactionId, EventType.TRANSACTION_STARTED_EVENT);
+
+			publishEvent(transactionId, EventType.TRANSACTION_DEBIT_STARTED_EVENT);
+			accountService.debitAccount(accountId, moneyTransferTask.getTransferDetail().getAmount());
+			publishEvent(transactionId, EventType.TRANSACTION_DEBIT_COMPLETED_EVENT);
 		}
 
 		@Override
@@ -71,18 +102,23 @@ public class SimpleAccountProcessor implements AccountProcessor {
 
 		private Long accountId;
 		private Long amount;
-		private AccountService accountService;
+		private String transactionId;
 
-		public CreditAccountExecutor(Long accountId, Long amount, AccountService accountService) {
+		public CreditAccountExecutor(Long accountId, Long amount, String transactionId) {
 			this.accountId = accountId;
 			this.amount = amount;
-			this.accountService = accountService;
+			this.transactionId = transactionId;
 		}
 
 		@Override
 		public void run() {
-			accountService.creditAccount(accountId, amount);
+			credit();
+		}
 
+		private void credit() {
+			publishEvent(transactionId, EventType.TRANSACTION_CREDIT_STARTED_EVENT);
+			accountService.creditAccount(accountId, amount);
+			publishEvent(transactionId, EventType.TRANSACTION_COMPLETED_EVENT);
 		}
 
 	}
