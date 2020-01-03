@@ -152,12 +152,7 @@ Output showing created Accounts
 
 # POST  http://localhost:4567/transfer 
 
-Input : 
-{
-	"fromAccount" : "1",
-	"toAccount" :"2",
-	"amount":"100"
-}
+# Input : {"fromAccount" : "1","toAccount" :"2","amount":"100" }
 
 
 # Output Confirming transfer queued
