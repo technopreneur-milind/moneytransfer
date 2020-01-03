@@ -22,15 +22,23 @@ Basically this application provides ability to :
 # Few words about Design/Architecture:
 
 When a user submits request for money transfer(endpoint#3), the request is uploaded to a queue and a transaction id is sent to back to user as a response . User can use this transactionId to check status of transfer using another endpoint(endpoint#4).
-System picks up each transfer from the queue and sends it processing to AcccountProcessor, this is to ensure that debit transaction for 
-a given fromaccount happens in the order of submission but at the same time, accounts transfers are independent and concurrent.
+
+System picks up each transfer from the queue and sends it processing to AcccountProcessor, this is to ensure that debit transaction for a given fromaccount happens in the order of submission but at the same time, accounts transfers are independent and concurrent.
+
 For example, if you send following transfers( fromAccount ->toAccount) :
+
 1 -> 2
+
 1->3
+
 1->4
+
 2->3
+
 3->4
+
 4->6
+
 
 System will rearrange these transaction as :
 AccountProcessor1 : Debit from 1 (for 2 ) -> Debit from 1 for 3 -> Debit from 1 for 4 
@@ -96,21 +104,29 @@ Step 1b. Input for second Account
  name:Tiger,
 # balance:1000
 }
+
 {"status":"SUCCESS","data":{"accountId":2,"name":"Tiger","balance":1000}}
+
 ==============================
 ==============================
 # Step 2. Get  accounts : GET  http://localhost:4567/accounts
 Output showing created Accounts
+
 {"status":"SUCCESS","data":[{"accountId":1,"name":"Scott","balance":1000},{"accountId":2,"name":"Tiger","balance":1000}]}
+
 ==============================
 #Step 3. Execute the Transfer of 100 : POST  http://localhost:4567/transfer 
-#Output Confirming transfer queued
+# Output Confirming transfer queued
 
-{"status":"SUCCESS","message":"Your transfers are succesfully queued ! Please refer Data Section for Transaction Id.You can quote this transaction Id for any queries related to the transfer. You can check status at /transfer/status/{transactionId} endpoint","data":"3d730dca-1ee1-4a1e-aef2-6ce643224f44"}
+{"status":"SUCCESS",
+# "message":"Your transfers are succesfully queued ! 
+Please refer Data Section for Transaction Id.You can quote this transaction Id for any queries related to the transfer. You can check status at /transfer/status/{transactionId} endpoint","data":"3d730dca-1ee1-4a1e-aef2-6ce643224f44"}
 
 ==============================
 ==============================
-#Step 4. Get  Transfer status : GET  http://localhost:4567/transfer/status/{3d730dca-1ee1-4a1e-aef2-6ce643224f44}
+#Step 4. Get  Transfer status : 
+#GET  http://localhost:4567/transfer/status/{3d730dca-1ee1-4a1e-aef2-6ce643224f44}
+
 Output showing Transfer Status
 "Transaction is Successful"
 ==============================
@@ -119,9 +135,11 @@ Output showing Transfer Status
 Output showing updated Accounts Balances
 {"status":"SUCCESS",
 "data":[
-#{"accountId":1,"name":"Scott","balance":900},
-#{"accountId":2,"name":"Tiger","balance":1100}
+# {"accountId":1,"name":"Scott","balance":900},
+# {"accountId":2,"name":"Tiger","balance":1100}
+
 ]}
+
 ==============================
 
 
