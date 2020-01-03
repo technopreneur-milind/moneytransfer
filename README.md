@@ -3,20 +3,24 @@
 
 Basically this application provides ability to :
 
-1> Create Account /Lists accounts
+    1> Create Account /Lists accounts
 
-2> Transfer money from Account A to Account B
+    2> Transfer money from Account A to Account B
 
-# 1> Endpoints available
-1> POST localhost:4567/accounts -- This is for creating account
+    3> Carry out Batch Transfers 
 
-2> GET localhost:4567/accounts - This is for getting all accounts
 
-3> POST localhost:4567/transfer - This is for money transfer from account A to B
+  #1> Endpoints available
+  
+	1> POST localhost:4567/accounts -- This is for creating account
 
-4> GET localhost:4567/transfer/status/{transactionId} -- This is for checking current status of Transfer
+	2> GET localhost:4567/accounts - This is for getting all accounts
 
-5> POST localhost:4567/batchTransfer - for Batch Transfer
+	3> POST localhost:4567/transfer - This is for money transfer from account A to B
+
+	4> GET localhost:4567/transfer/status/{transactionId} -- This is for checking current status of Transfer
+
+	5> POST localhost:4567/batchTransfer - for Batch Transfer
 
 
 # 2> Few words about Design/Architecture:
