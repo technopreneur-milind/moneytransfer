@@ -184,7 +184,6 @@ Output showing Transfer Status
 	 "Transaction is Successful"
 
 ==============================
-==============================
 
 #Step 5. Check Account Balance to verify the transfer : GET  http://localhost:4567/accounts
 
@@ -197,6 +196,7 @@ Output showing updated Accounts Balances
 
 		]}
 
+Y
 ==============================
 
 
