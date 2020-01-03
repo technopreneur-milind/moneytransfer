@@ -76,8 +76,10 @@ The dependencies is through interfaces so one class really doesnt know about oth
 
 	#For example, most implementations in this exercise are memory based however if we want to turn
 	to some persistent based implementations , we can easily do so by implementing the given interface.
+	
+Important :
 
-# If you are running low on time, you can skip "How to Run"(#3) and go to Quick Demo(#4)/Detailed Demo(#5) Sections.
+ 	#If you are running low on time, you can skip "How to Run"(#3) and go to Quick Demo(#4)/Detailed Demo(#5) Sections.
 
 ====================
 # 3> How to run the App:
