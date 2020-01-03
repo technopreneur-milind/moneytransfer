@@ -23,10 +23,10 @@ Output showing created Accounts
 ==============================
 Step 3. Execute the Transfer of 100 : POST  http://localhost:4567/transfer
 Output Confirming transfer queued
-{"status":"SUCCESS","message":"Your transfers are succesfully queued ! Please refer Data Section for Transaction Id.You can quote this transaction Id for any queries related to the transfer. You can check status at /transfer/status/{transactionId} endpoint","data":"4116f8c7-78c7-4f5e-9696-8ecea9ffe207"}
+{"status":"SUCCESS","message":"Your transfers are succesfully queued ! Please refer Data Section for Transaction Id.You can quote this transaction Id for any queries related to the transfer. You can check status at /transfer/status/{transactionId} endpoint","data":"6164fb5d-1886-4e43-b016-64fb6c9efc3c"}
 ==============================
 ==============================
-Step 4. Get  Transfer status : GET  http://localhost:4567/transfer/status/{4116f8c7-78c7-4f5e-9696-8ecea9ffe207}
+Step 4. Get  Transfer status : GET  http://localhost:4567/transfer/status/{6164fb5d-1886-4e43-b016-64fb6c9efc3c}
 Output showing Transfer Status
 "Transaction is Successful"
 ==============================
