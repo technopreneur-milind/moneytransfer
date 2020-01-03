@@ -109,7 +109,8 @@ java -jar target/moneytransfer-0.0.1-SNAPSHOT.jar
 You can look at 
 # MoneyTrasferAppDemo.txt available at root directory.
 
-This file has a recording of input and output and is output of End-to-End test,com.technopreneur.moneytransfer.EndToEndMoneyTransferTest.java.
+This file has a recording of input and output for a end to end test, simulating account creation and transfer.
+
 
 If you like, you can even execute com.technopreneur.moneytransfer.EndToEndMoneyTransferTest.java to see live output.
 
@@ -121,16 +122,19 @@ Step 1a. Input for first Account
 {
  accountId:1,
  name:Scott,
-# balance:1000
+ balance:1000
 }
+
 Output for first Account
 {"status":"SUCCESS","data":{"accountId":1,"name":"Scott","balance":1000}}
+
 Step 1b. Input for second Account
 {
  accountId:2,
  name:Tiger,
-# balance:1000
+ balance:1000
 }
+
 
 {"status":"SUCCESS","data":{"accountId":2,"name":"Tiger","balance":1000}}
 
@@ -139,10 +143,13 @@ Step 1b. Input for second Account
 # Step 2. Get  accounts : GET  http://localhost:4567/accounts
 Output showing created Accounts
 
+
 {"status":"SUCCESS","data":[{"accountId":1,"name":"Scott","balance":1000},{"accountId":2,"name":"Tiger","balance":1000}]}
 
 ==============================
+
 #Step 3. Execute the Transfer of 100 : POST  http://localhost:4567/transfer 
+
 # Output Confirming transfer queued
 
 {"status":"SUCCESS",
@@ -151,15 +158,21 @@ Please refer Data Section for Transaction Id.You can quote this transaction Id f
 
 ==============================
 ==============================
+
 #Step 4. Get  Transfer status : 
+
 #GET  http://localhost:4567/transfer/status/{3d730dca-1ee1-4a1e-aef2-6ce643224f44}
 
 Output showing Transfer Status
 "Transaction is Successful"
+
 ==============================
 ==============================
+
 #Step 5. Check Account Balance to verify the transfer : GET  http://localhost:4567/accounts
+
 Output showing updated Accounts Balances
+
 {"status":"SUCCESS",
 "data":[
 # {"accountId":1,"name":"Scott","balance":900},
