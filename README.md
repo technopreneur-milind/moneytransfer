@@ -1,4 +1,4 @@
-# 1> MoneyTransfer App
+#  MoneyTransfer App
 
 
 Basically this application provides ability to :
@@ -7,7 +7,7 @@ Basically this application provides ability to :
 
 2> Transfer money from Account A to Account B
 
-# 2> Endpoints available
+# 1> Endpoints available
 1> POST localhost:4567/accounts -- This is for creating account
 
 2> GET localhost:4567/accounts - This is for getting all accounts
@@ -19,7 +19,7 @@ Basically this application provides ability to :
 5> POST localhost:4567/batchTransfer - for Batch Transfer
 
 
-# 3> Few words about Design/Architecture:
+# 2> Few words about Design/Architecture:
 
 When a user submits request for money transfer(endpoint#3), the request is uploaded to a queue and a transaction id is sent to back to user as a response . User can use this transactionId to check status of transfer using another endpoint(endpoint#4).
 
@@ -71,10 +71,10 @@ The dependencies is through interfaces so one class really doesnt know about oth
 # For example, most implementations in this exercise are memory based however if we want to turn to some persistent based implementations , we can easily do so by implementing the given interface.
 
 
-# If you are running low on time, you can skip "How to Run"(#4) and go to Quick Demo(#5)/Detailed Demo(#6) Sections.
+# If you are running low on time, you can skip "How to Run"(#3) and go to Quick Demo(#4)/Detailed Demo(#5) Sections.
 
 ====================
-# 4> How to run the App:
+# 3> How to run the App:
 
 
 Prerequisites : 
@@ -105,7 +105,7 @@ mvn clean install
 java -jar target/moneytransfer-0.0.1-SNAPSHOT.jar
 
 
-# 5> Quick Demo 
+# 4> Quick Demo 
 You can look at 
 # MoneyTrasferAppDemo.txt available at root directory.
 
@@ -115,7 +115,7 @@ This file has a recording of input and output for a end to end test, simulating 
 If you like, you can even execute com.technopreneur.moneytransfer.EndToEndMoneyTransferTest.java to see live output.
 
 
-# 6> Detailed Demo 
+# 5> Detailed Demo 
 ==============================
 # Step 1. Create two accounts : POST  http://localhost:4567/accounts
 Step 1a. Input for first Account
