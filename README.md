@@ -71,7 +71,7 @@ The dependencies is through interfaces so one class really doesnt know about oth
 # For example, most implementations in this exercise are memory based however if we want to turn to some persistent based implementations , we can easily do so by implementing the given interface.
 
 
-
+If you are running low on time, you can skip "How to Run" and go to Quick Demo/Detailed Demo Sections.
 
 
 # How to run the App:
@@ -155,7 +155,8 @@ Output showing created Accounts
 # Input : {"fromAccount" : "1","toAccount" :"2","amount":"100" }
 
 
-# Output Confirming transfer queued
+# Output 
+Confirming transfer queued
 
 {"status":"SUCCESS",
 # "message":"Your transfers are succesfully queued ! 
