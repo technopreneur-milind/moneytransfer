@@ -83,41 +83,42 @@ The dependencies is through interfaces so one class really doesnt know about oth
 # 3> How to run the App:
 
 
-Prerequisites : 
-1> Install JDK 1.8 
+	Prerequisites : 
+	1> Install JDK 1.8 
 
  Without any additional thing:
  
-Option 1 : execute run.sh (or run.bat) 
+	Option 1 : execute run.sh (or run.bat) 
 
-Option 2 : navigate to moneytransfer root directory and execute java -jar moneytransfer-0.0.1-SNAPSHOT.jar
+
+	Option 2 : navigate to moneytransfer root directory and execute java -jar moneytransfer-0.0.1-SNAPSHOT.jar
 
 If you want to verify if application is up and running , execute following GET request:
 GET http://localhost:4567/accounts . ( It will return success)
 
-with Maven( or if you want to Build & run)
+Alternative ways of running Application with Maven( or if you want to Build & run):
 
 
-Option 1: run following command 
+Option 1: 
+	run following command 
 
-mvn exec:java
+	mvn exec:java
 
 Option 2: 
 
-1> run following command 
+	1> run following command 
 
-mvn clean install
+	mvn clean install
 
-2> Now run following command
+	2> Now run following command
 
-java -jar target/moneytransfer-0.0.1-SNAPSHOT.jar
+	java -jar target/moneytransfer-0.0.1-SNAPSHOT.jar
 
 
 # 4> Quick Demo 
-You can look at 
-# MoneyTrasferAppDemo.txt available at root directory.
+        You can look at MoneyTrasferAppDemo.txt available at root directory.
 
-This file has a recording of input and output for a end to end test, simulating account creation and transfer.
+	This file has a recording of input and output for a end to end test, simulating account creation and transfer.
 
 
 If you like, you can even execute com.technopreneur.moneytransfer.EndToEndMoneyTransferTest.java to see live output.
@@ -125,7 +126,7 @@ If you like, you can even execute com.technopreneur.moneytransfer.EndToEndMoneyT
 
 # 5> Detailed Demo 
 ==============================
-# Step 1. Create two accounts : POST  http://localhost:4567/accounts
+	# Step 1. Create two accounts : POST  http://localhost:4567/accounts
 Step 1a. Input for first Account
 {
  accountId:1,
